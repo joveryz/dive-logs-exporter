@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace ShearwaterDiveLogParser.Shearwater
+namespace Shearwater
 {
     public class ShearwaterXMLExporterMod : IDiveExport
     {
@@ -27,7 +27,6 @@ namespace ShearwaterDiveLogParser.Shearwater
 
         public void StartExportSession(string[] diveIds, string path)
         {
-            CSVExporter
         }
 
         public void EndExportSession()

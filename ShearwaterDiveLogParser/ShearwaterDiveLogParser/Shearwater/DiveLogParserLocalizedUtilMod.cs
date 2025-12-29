@@ -1,7 +1,7 @@
 ﻿
 using I2.Loc;
 
-namespace ShearwaterDiveLogParser.Shearwater
+namespace Shearwater
 {
     public class DiveLogParserLocalizedUtil
     {

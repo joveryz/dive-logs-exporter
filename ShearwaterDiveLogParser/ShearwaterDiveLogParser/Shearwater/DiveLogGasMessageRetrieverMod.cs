@@ -3,7 +3,7 @@ using Assets.Scripts.FileFormats.Import.DiveLogParser.Utility;
 using DiveLogModels;
 using ShearwaterUtils;
 
-namespace ShearwaterDiveLogParser.Shearwater
+namespace Shearwater
 {
 
     public class DiveLogGasMessageRetrieverMod

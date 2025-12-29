@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace ShearwaterDiveLogParser.Shearwater
+namespace Shearwater
 {
     public static class ScriptLocalizationMod
     {

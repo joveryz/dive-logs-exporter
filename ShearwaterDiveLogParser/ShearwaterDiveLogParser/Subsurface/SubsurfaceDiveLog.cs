@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace ShearwaterDiveLogParser.Subsurface
+namespace ShearwaterDiveLogExporter.Subsurface
 {
     [XmlRoot("divelog")]
     public class DiveLog
