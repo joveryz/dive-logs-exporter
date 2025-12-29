@@ -36,38 +36,47 @@
   <ItemGroup>
     <Reference Include="Assembly-CSharp, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Shearwater\Assembly-CSharp.dll</HintPath>
+      <HintPath>Shearwater\Binary\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Shearwater\Castle.Core.dll</HintPath>
+      <HintPath>Shearwater\Binary\Castle.Core.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="CoreParserUtilities, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Shearwater\CoreParserUtilities.dll</HintPath>
+      <HintPath>Shearwater\Binary\CoreParserUtilities.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="DiveLogModels, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Shearwater\DiveLogModels.dll</HintPath>
+      <HintPath>Shearwater\Binary\DiveLogModels.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="DiveLogParser, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Shearwater\DiveLogParser.dll</HintPath>
+      <HintPath>Shearwater\Binary\DiveLogParser.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ExtendedCoreParserUtilities, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Shearwater\ExtendedCoreParserUtilities.dll</HintPath>
+      <HintPath>Shearwater\Binary\ExtendedCoreParserUtilities.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="netstandard">
-      <HintPath>Shearwater\netstandard.dll</HintPath>
+      <HintPath>Shearwater\Binary\netstandard.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="SebaLab, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Shearwater\SebaLab.dll</HintPath>
+      <HintPath>Shearwater\Binary\SebaLab.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ShearwaterUtils, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Shearwater\ShearwaterUtils.dll</HintPath>
+      <HintPath>Shearwater\Binary\ShearwaterUtils.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=1.3.3.11, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpZipLib.1.3.3\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
@@ -98,42 +107,54 @@
     <None Include="packages.config" />
     <AdditionalFiles Include="Shearwater\Resource\I2Languages.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <TargetPath>I2Languages.json</TargetPath>
     </AdditionalFiles>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Shearwater\Bin\Assembly-CSharp.dll">
+    <Content Include="Shearwater\Binary\Assembly-CSharp.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <TargetPath>Assembly-CSharp.dll</TargetPath>
     </Content>
-    <Content Include="Shearwater\Bin\Castle.Core.dll">
+    <Content Include="Shearwater\Binary\Castle.Core.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <TargetPath>Castle.Core.dll</TargetPath>
     </Content>
-    <Content Include="Shearwater\Bin\CoreParserUtilities.dll">
+    <Content Include="Shearwater\Binary\CoreParserUtilities.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <TargetPath>CoreParserUtilities.dll</TargetPath>
     </Content>
-    <Content Include="Shearwater\Bin\DiveLogModels.dll">
+    <Content Include="Shearwater\Binary\DiveLogModels.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <TargetPath>DiveLogModels.dll</TargetPath>
     </Content>
-    <Content Include="Shearwater\Bin\DiveLogParser.dll">
+    <Content Include="Shearwater\Binary\DiveLogParser.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <TargetPath>DiveLogParser.dll</TargetPath>
     </Content>
-    <Content Include="Shearwater\Bin\ExtendedCoreParserUtilities.dll">
+    <Content Include="Shearwater\Binary\ExtendedCoreParserUtilities.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <TargetPath>ExtendedCoreParserUtilities.dll</TargetPath>
     </Content>
-    <Content Include="Shearwater\Bin\netstandard.dll">
+    <Content Include="Shearwater\Binary\netstandard.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <TargetPath>netstandard.dll</TargetPath>
     </Content>
-    <Content Include="Shearwater\Bin\SebaLab.dll">
+    <Content Include="Shearwater\Binary\SebaLab.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <TargetPath>SebaLab.dll</TargetPath>
     </Content>
-    <Content Include="Shearwater\Bin\ShearwaterUtils.dll">
+    <Content Include="Shearwater\Binary\ShearwaterUtils.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <TargetPath>ShearwaterUtils.dll</TargetPath>
     </Content>
-    <AdditionalFiles Include="Shearwater\Bin\sqlite3.dll">
+    <AdditionalFiles Include="Shearwater\Binary\sqlite3.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <TargetPath>sqlite3.dll</TargetPath>
     </AdditionalFiles>
-    <Content Include="Shearwater\Bin\UnityEngine.CoreModule.dll">
+    <Content Include="Shearwater\Binary\UnityEngine.CoreModule.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <TargetPath>UnityEngine.CoreModule.dll</TargetPath>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
