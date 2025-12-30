@@ -1,19 +1,17 @@
-﻿using Assets.Scripts.DiveLogs.Utils.DiveLogSampleUtils;
-using Assets.Scripts.DiveLogs.Utils.Gases;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Serialization;
+using Assets.Scripts.DiveLogs.Utils.DiveLogSampleUtils;
 using Assets.Scripts.FileFormats.Export;
 using Assets.Scripts.FileFormats.Legacy.ShearwaterXML;
 using CoreParserUtilities;
 using DiveLogModels;
 using ExtendedCoreParserUtilities;
 using ShearwaterUtils;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
-using System.Xml.Serialization;
 
 namespace Shearwater
 {

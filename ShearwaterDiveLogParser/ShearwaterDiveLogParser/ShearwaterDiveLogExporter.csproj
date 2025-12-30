@@ -94,17 +94,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DiveLog.cs" />
-    <Compile Include="DiveLogExporter.cs" />
-    <Compile Include="DiveLogSample.cs" />
-    <Compile Include="DiveLogSummary.cs" />
+    <Compile Include="ExportedDiveLog.cs" />
+    <Compile Include="ExportedDiveLogExtensions.cs" />
+    <Compile Include="ExportedDiveLogSample.cs" />
+    <Compile Include="ExportedDiveLogSummary.cs" />
+    <Compile Include="ExportedDiveLogTankProfile.cs" />
     <Compile Include="Shearwater\DiveLogGasMessageRetrieverMod.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shearwater\DiveLogParserLocalizedUtilMod.cs" />
+    <Compile Include="Shearwater\DiveLogProductUtilMod.cs" />
     <Compile Include="Shearwater\ScriptLocalizationMod.cs" />
     <Compile Include="Shearwater\ShearwaterXMLExporterMod.cs" />
-    <Compile Include="Subsurface\SubsurfaceDiveLog.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

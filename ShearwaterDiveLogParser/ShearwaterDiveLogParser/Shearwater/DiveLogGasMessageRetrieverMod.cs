@@ -1,6 +1,4 @@
-﻿
-using Assets.Scripts.FileFormats.Import.DiveLogParser.Utility;
-using DiveLogModels;
+﻿using DiveLogModels;
 using ShearwaterUtils;
 
 namespace Shearwater
