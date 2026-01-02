@@ -99,6 +99,10 @@
     <Compile Include="ExportedDiveLogSample.cs" />
     <Compile Include="ExportedDiveLogSummary.cs" />
     <Compile Include="ExportedDiveLogTank.cs" />
+    <Compile Include="Exporter\ExporterFactory.cs" />
+    <Compile Include="Exporter\GarminDiveLogExporter.cs" />
+    <Compile Include="Exporter\IDiveLogExporter.cs" />
+    <Compile Include="Exporter\ShearwaterDiveLogExporter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shearwater\ShearwaterUtilsWrapper.cs" />

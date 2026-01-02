@@ -1,6 +1,6 @@
 ﻿namespace DiveLogExporter
 {
-    internal class ExportedDiveLogSummary
+    public class ExportedDiveLogSummary
     {
         // Summary Info
 

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DiveLogExporter
 {
-    internal static class ExportedDiveLogExtensions
+    public static class ExportedDiveLogExtensions
     {
         public static string ToCsvHeader(this object obj)
         {

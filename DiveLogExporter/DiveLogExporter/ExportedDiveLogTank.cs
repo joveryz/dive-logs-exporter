@@ -1,6 +1,6 @@
 ﻿namespace DiveLogExporter
 {
-    internal class ExportedDiveLogTank
+    public class ExportedDiveLogTank
     {
         public int Number { get; set; }
 
