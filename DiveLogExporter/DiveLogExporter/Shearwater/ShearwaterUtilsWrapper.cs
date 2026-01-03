@@ -3,6 +3,8 @@ using Assets.Scripts.DiveLogs.Utils.Gases;
 using Assets.Scripts.Utility;
 using Assets.ShearwaterCloud.Modules.Graphs.DiveGraph.GraphAssembly.GraphDataAssembly.SeriesSampleAssemblers;
 using CoreParserUtilities;
+using DiveLogExporter;
+using DiveLogExporter.Model;
 using DiveLogModels;
 using ExtendedCoreParserUtilities;
 using ShearwaterUtils;
@@ -116,22 +118,28 @@ namespace Shearwater
             return null;
         }
 
-        public static (bool, string?, string?, double?, int?, int?, int?) GetTankInfo(DiveLog diveLog, int tankIndex)
+        public static GeneralDiveLogTankInformation GetTankInformation(DiveLog diveLog, int tankIndex)
         {
             var tankProfileData = TankProfileSerializer.ConvertStringToTankProfileData(diveLog.DiveLogDetails.TankProfileData.Value);
             var tankEnabled = tankProfileData.TankData[tankIndex].DiveTransmitter.IsOn;
+
             if (tankEnabled)
             {
-                var tankTransmitterName = tankProfileData.TankData[tankIndex].DiveTransmitter.Name;
-                var tankTransmitterSerialNumber = DiveLogSerialNumberUtil.FormatAiSerialNumber(diveLog, tankProfileData.TankData[tankIndex].DiveTransmitter.UnformattedSerialNumber);
-                var tankAverageDepthInMeters = tankProfileData.TankData[tankIndex].GasProfile.AverageDepthInMeters;
-                var tankGasO2Percent = tankProfileData.TankData[tankIndex].GasProfile.O2Percent;
-                var tankGasHePercent = tankProfileData.TankData[tankIndex].GasProfile.HePercent;
-                var tankGasN2Percent = 100 - tankProfileData.TankData[tankIndex].GasProfile.O2Percent - tankProfileData.TankData[tankIndex].GasProfile.HePercent;
-                return (tankEnabled, tankTransmitterName, tankTransmitterSerialNumber, tankAverageDepthInMeters, tankGasO2Percent, tankGasHePercent, tankGasN2Percent);
+                return new GeneralDiveLogTankInformation
+                {
+                    Number = GetDiveNumber(diveLog),
+                    Index = tankIndex,
+                    Enabled = tankEnabled,
+                    TransmitterName = tankProfileData.TankData[tankIndex].DiveTransmitter.Name,
+                    TransmitterSerialNumber = DiveLogSerialNumberUtil.FormatAiSerialNumber(diveLog, tankProfileData.TankData[tankIndex].DiveTransmitter.UnformattedSerialNumber),
+                    AverageDepthInMeters = tankProfileData.TankData[tankIndex].GasProfile.AverageDepthInMeters,
+                    GasO2Percent = tankProfileData.TankData[tankIndex].GasProfile.O2Percent,
+                    GasHePercent = tankProfileData.TankData[tankIndex].GasProfile.HePercent,
+                    GasN2Percent = 100 - tankProfileData.TankData[tankIndex].GasProfile.O2Percent - tankProfileData.TankData[tankIndex].GasProfile.HePercent,
+                };
             }
 
-            return (false, null, null, null, null, null, null);
+            return null;
         }
 
         public static bool IsTankPressureValid(int sensorData)

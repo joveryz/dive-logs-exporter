@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DiveLogExporter.Model;
 
 namespace DiveLogExporter.Exporter
 {
@@ -10,6 +11,6 @@ namespace DiveLogExporter.Exporter
 
         bool CanHandle(string inputPath);
 
-        List<ExportedDiveLog> Export(string inputPath);
+        List<GeneralDiveLog> Export(string inputPath);
     }
 }

@@ -64,6 +64,9 @@
       <HintPath>Shearwater\Binary\ExtendedCoreParserUtilities.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="fitsdk, Version=21.171.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Garmin.FIT.Sdk.21.171.0\lib\net46\fitsdk.dll</HintPath>
+    </Reference>
     <Reference Include="netstandard">
       <HintPath>Shearwater\Binary\netstandard.dll</HintPath>
       <Private>False</Private>
@@ -94,11 +97,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExportedDiveLog.cs" />
-    <Compile Include="ExportedDiveLogExtensions.cs" />
-    <Compile Include="ExportedDiveLogSample.cs" />
-    <Compile Include="ExportedDiveLogSummary.cs" />
-    <Compile Include="ExportedDiveLogTank.cs" />
+    <Compile Include="Model\GeneralDiveLog.cs" />
+    <Compile Include="Model\GeneralDiveLogExtensions.cs" />
+    <Compile Include="Model\GeneralDiveLogSample.cs" />
+    <Compile Include="Model\GeneralDiveLogSummary.cs" />
+    <Compile Include="Model\GeneralDiveLogTankInformation.cs" />
     <Compile Include="Exporter\ExporterFactory.cs" />
     <Compile Include="Exporter\GarminDiveLogExporter.cs" />
     <Compile Include="Exporter\IDiveLogExporter.cs" />
@@ -111,7 +114,9 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Exporter\Binary\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Shearwater\Binary\Assembly-CSharp.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

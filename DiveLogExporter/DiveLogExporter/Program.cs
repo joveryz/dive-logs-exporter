@@ -3,6 +3,7 @@ using System.IO;
 using System.Text;
 using Assets.Scripts.Persistence.LocalCache;
 using DiveLogExporter.Exporter;
+using DiveLogExporter.Model;
 using DiveLogModels;
 
 namespace DiveLogExporter
@@ -19,15 +20,16 @@ namespace DiveLogExporter
                 return 1;
             }
 
-            var summaryCsvString = new StringBuilder();
-            var tankCsvString = new StringBuilder();
-            var samplesCsvString = new StringBuilder();
+            var allSummary = new StringBuilder();
+            var allTanks = new StringBuilder();
+            var allSamples = new StringBuilder();
 
-            summaryCsvString.AppendLine(new ExportedDiveLogSummary().ToCsvHeader());
-            tankCsvString.AppendLine(new ExportedDiveLogTank().ToCsvHeader());
-            samplesCsvString.AppendLine(new ExportedDiveLogSample().ToCsvHeader());
+            allSummary.AppendLine(new GeneralDiveLogSummary().ToCsvHeader());
+            allTanks.AppendLine(new GeneralDiveLogTankInformation().ToCsvHeader());
+            allSamples.AppendLine(new GeneralDiveLogSample().ToCsvHeader());
 
             var inputPath = args[0];
+            var outputPath = args[1];
             var factory = new ExporterFactory();
             var exporter = factory.GetExporter(inputPath);
             if (exporter == null)
@@ -36,22 +38,36 @@ namespace DiveLogExporter
                 return 1;
             }
 
-            exporter.Export(args[0]).ForEach(diveLog =>
+            exporter.Export(inputPath).ForEach(diveLog =>
             {
-                summaryCsvString.AppendLine(diveLog.Summary.ToCsvRow());
-                tankCsvString.AppendLine(diveLog.Tank.ToCsvRow());
-                samplesCsvString.AppendLine(diveLog.Samples.ToCsvRows());
+                var summary = diveLog.Summary.ToCsvRow();
+                var tanks = diveLog.Tanks.ToCsvRows();
+                var samples = diveLog.Samples.ToCsvRows();
+
+                if (!string.IsNullOrWhiteSpace(summary))
+                {
+                    allSummary.AppendLine(summary);
+                }
+
+                if (!string.IsNullOrWhiteSpace(tanks))
+                {
+                    allTanks.AppendLine(tanks);
+                }
+
+                if (!string.IsNullOrWhiteSpace(samples))
+                {
+                    allSamples.AppendLine(samples);
+                }
             });
 
-            var destDir = args[1];
-            if (!destDir.EndsWith(Path.DirectorySeparatorChar.ToString()))
+            if (!outputPath.EndsWith(Path.DirectorySeparatorChar.ToString()))
             {
-                destDir += Path.DirectorySeparatorChar;
+                outputPath += Path.DirectorySeparatorChar;
             }
-            Console.WriteLine($"Writing export files to {destDir}...");
-            File.WriteAllText(Path.Combine(destDir, "shearwater-export-summary.csv"), summaryCsvString.ToString());
-            File.WriteAllText(Path.Combine(destDir, "shearwater-export-tanks.csv"), tankCsvString.ToString());
-            File.WriteAllText(Path.Combine(destDir, "shearwater-export-samples.csv"), samplesCsvString.ToString());
+            Console.WriteLine($"Writing export files to {outputPath}...");
+            File.WriteAllText(Path.Combine(outputPath, "shearwater-export-summary.csv"), allSummary.ToString());
+            File.WriteAllText(Path.Combine(outputPath, "shearwater-export-tanks.csv"), allTanks.ToString());
+            File.WriteAllText(Path.Combine(outputPath, "shearwater-export-samples.csv"), allSamples.ToString());
             Console.WriteLine("Export complete.");
 
             return 0;

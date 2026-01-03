@@ -1,16 +1,18 @@
-﻿namespace DiveLogExporter
+﻿namespace DiveLogExporter.Model
 {
-    public class ExportedDiveLogSample
+    public class GeneralDiveLogSample
     {
-        public int Number { get; set; }
+        public int? Number { get; set; }
 
-        public int ElapsedTimeInSeconds { get; set; }
+        public int? ElapsedTimeInSeconds { get; set; }
 
-        public object Depth { get; set; }
+        public double? Depth { get; set; }
 
-        public int Temperature { get; set; }
+        public int? Temperature { get; set; }
 
-        public float BatteryVoltage { get; set; }
+        public int? HeartRate { get; set; }
+
+        public float? BatteryVoltage { get; set; }
 
         public int? TimeToSurfaceInMinutes { get; set; }
 

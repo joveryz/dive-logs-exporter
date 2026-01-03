@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Assets.Scripts.Persistence.LocalCache;
 using Castle.Core.Logging;
+using DiveLogExporter.Model;
 using DiveLogModels;
 using Shearwater;
 
@@ -17,18 +18,20 @@ namespace DiveLogExporter.Exporter
 
         public IReadOnlyList<string> SupportedExtensions { get; } = new List<string> { ".db" };
 
+        private static readonly int MaxTankCount = 4;
+
         public bool CanHandle(string inputPath)
         {
             return File.Exists(inputPath) && SupportedExtensions.Contains(Path.GetExtension(inputPath), StringComparer.OrdinalIgnoreCase);
         }
 
-        public List<ExportedDiveLog> Export(string inputPath)
+        public List<GeneralDiveLog> Export(string inputPath)
         {
             var shearwaterDataService = new DataService(inputPath);
             var shearwaterDiveLogs = shearwaterDataService.GetDiveLogsWithRaw();
             Console.WriteLine($"[{Name}] Found {shearwaterDiveLogs.Count} dives in database");
 
-            var res = new List<ExportedDiveLog>();
+            var res = new List<GeneralDiveLog>();
 
             foreach (var shearwaterDiveLog in shearwaterDiveLogs)
             {
@@ -40,19 +43,27 @@ namespace DiveLogExporter.Exporter
         }
 
 
-        private ExportedDiveLog ExportSingleDiveLog(DiveLog shearwaterDiveLog, List<DiveLogSample> shearwaterDiveLogSamples)
+        private GeneralDiveLog ExportSingleDiveLog(DiveLog shearwaterDiveLog, List<DiveLogSample> shearwaterDiveLogSamples)
         {
-            var number = ShearwaterUtilsWrapper.GetDiveNumber(shearwaterDiveLog);
+            return new GeneralDiveLog
+            {
+                Summary = ExportSingleDiveLogSummary(shearwaterDiveLog),
+                Samples = ExportSingleDiveLogSampls(shearwaterDiveLog, shearwaterDiveLogSamples),
+                Tanks = ExportSingleDiveLogTanks(shearwaterDiveLog),
+            };
+        }
 
+        private GeneralDiveLogSummary ExportSingleDiveLogSummary(DiveLog shearwaterDiveLog)
+        {
             var header = shearwaterDiveLog.DiveLogHeader;
             var footer = shearwaterDiveLog.DiveLogFooter;
             var details = shearwaterDiveLog.DiveLogDetails;
             var interpretedLog = shearwaterDiveLog.InterpretedLogData;
-            var res = new ExportedDiveLog();
-            var Summary = new ExportedDiveLogSummary
+
+            var res = new GeneralDiveLogSummary
             {
                 // Summary Info
-                Number = number,
+                Number = ShearwaterUtilsWrapper.GetDiveNumber(shearwaterDiveLog),
                 Mode = ShearwaterUtilsWrapper.GetDiveMode(shearwaterDiveLog),
                 StartDate = details.DiveDate.ToString(),
                 EndDate = details.DiveDate.AddSeconds(footer.DiveTimeInSeconds).ToString(),
@@ -88,32 +99,20 @@ namespace DiveLogExporter.Exporter
             if (!ShearwaterUtilsWrapper.IsFreeDive(shearwaterDiveLog))
             {
                 // Optional Deco Info
-                Summary.DecoModel = ShearwaterUtilsWrapper.GetDecoModel(shearwaterDiveLog);
-                Summary.GradientFactorLow = header.GradientFactorLow;
-                Summary.GradientFactorHigh = header.GradientFactorHigh;
-                Summary.GradientFactor99Max = interpretedLog.PeakEndGF99;
-                Summary.CNSPercentPreDive = header.CnsPercent;
-                Summary.CNSPercentPostDive = footer.CnsPercent;
+                res.DecoModel = ShearwaterUtilsWrapper.GetDecoModel(shearwaterDiveLog);
+                res.GradientFactorLow = header.GradientFactorLow;
+                res.GradientFactorHigh = header.GradientFactorHigh;
+                res.GradientFactor99Max = interpretedLog.PeakEndGF99;
+                res.CNSPercentPreDive = header.CnsPercent;
+                res.CNSPercentPostDive = footer.CnsPercent;
             }
 
-            res.Summary = Summary;
+            return res;
+        }
 
-            if (!ShearwaterUtilsWrapper.IsFreeDive(shearwaterDiveLog))
-            {
-                var Tank = new ExportedDiveLogTank
-                {
-                    Number = number,
-                };
-
-                (Tank.Tank1Enabled, Tank.Tank1TransmitterName, Tank.Tank1TransmitterSerialNumber, Tank.Tank1AverageDepthInMeters, Tank.Tank1GasO2Percent, Tank.Tank1GasHePercent, Tank.Tank1GasN2Percent) = ShearwaterUtilsWrapper.GetTankInfo(shearwaterDiveLog, 0);
-                (Tank.Tank2Enabled, Tank.Tank2TransmitterName, Tank.Tank2TransmitterSerialNumber, Tank.Tank2AverageDepthInMeters, Tank.Tank2GasO2Percent, Tank.Tank2GasHePercent, Tank.Tank2GasN2Percent) = ShearwaterUtilsWrapper.GetTankInfo(shearwaterDiveLog, 1);
-                (Tank.Tank3Enabled, Tank.Tank3TransmitterName, Tank.Tank3TransmitterSerialNumber, Tank.Tank3AverageDepthInMeters, Tank.Tank3GasO2Percent, Tank.Tank3GasHePercent, Tank.Tank3GasN2Percent) = ShearwaterUtilsWrapper.GetTankInfo(shearwaterDiveLog, 2);
-                (Tank.Tank4Enabled, Tank.Tank4TransmitterName, Tank.Tank4TransmitterSerialNumber, Tank.Tank4AverageDepthInMeters, Tank.Tank4GasO2Percent, Tank.Tank4GasHePercent, Tank.Tank4GasN2Percent) = ShearwaterUtilsWrapper.GetTankInfo(shearwaterDiveLog, 3);
-
-                res.Tank = Tank;
-            }
-
-            var Samples = new List<ExportedDiveLogSample>();
+        private List<GeneralDiveLogSample> ExportSingleDiveLogSampls(DiveLog shearwaterDiveLog, List<DiveLogSample> shearwaterDiveLogSamples)
+        {
+            var res = new List<GeneralDiveLogSample>();
 
             foreach (var shearwaterDiveLogSample in shearwaterDiveLogSamples)
             {
@@ -122,9 +121,9 @@ namespace DiveLogExporter.Exporter
                     continue;
                 }
 
-                var sample = new ExportedDiveLogSample
+                var sample = new GeneralDiveLogSample
                 {
-                    Number = number,
+                    Number = ShearwaterUtilsWrapper.GetDiveNumber(shearwaterDiveLog),
                     ElapsedTimeInSeconds = (int)shearwaterDiveLogSample.TimeSinceStartInSeconds,
                     Depth = ShearwaterUtilsWrapper.GetDepthInMeters(shearwaterDiveLog, shearwaterDiveLogSample),
                     Temperature = shearwaterDiveLogSample.WaterTemperature,
@@ -150,11 +149,29 @@ namespace DiveLogExporter.Exporter
                     sample.GasTimeRemainingInMinutes = ShearwaterUtilsWrapper.GetGasTimeRemainingInMinutes(shearwaterDiveLogSample);
                 }
 
-                Samples.Add(sample);
+                res.Add(sample);
             }
 
-            res.Samples = Samples;
-            return res;
+            return res.Any() ? res : null;
+        }
+
+        private List<GeneralDiveLogTankInformation> ExportSingleDiveLogTanks(DiveLog shearwaterDiveLog)
+        {
+            var res = new List<GeneralDiveLogTankInformation>();
+            if (!ShearwaterUtilsWrapper.IsFreeDive(shearwaterDiveLog))
+            {
+                for (int i = 0; i < MaxTankCount; ++i)
+                {
+                    var tankInfo = ShearwaterUtilsWrapper.GetTankInformation(shearwaterDiveLog, i);
+
+                    if (tankInfo != null)
+                    {
+                        res.Add(tankInfo);
+                    }
+                }
+            }
+
+            return res.Any() ? res : null;
         }
     }
 }

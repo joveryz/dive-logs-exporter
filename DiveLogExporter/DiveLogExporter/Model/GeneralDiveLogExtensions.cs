@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DiveLogExporter
+namespace DiveLogExporter.Model
 {
-    public static class ExportedDiveLogExtensions
+    public static class GeneralDiveLogExtensions
     {
         public static string ToCsvHeader(this object obj)
         {
@@ -45,6 +45,11 @@ namespace DiveLogExporter
 
         public static string ToCsvRows(this IEnumerable<object> objs)
         {
+            if (objs == null)
+            {
+                return string.Empty;
+            }
+
             var sb = new StringBuilder();
             foreach (var obj in objs)
             {
