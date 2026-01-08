@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Assets.Scripts.DiveLogs.Utils.DiveLogUtils;
 using Assets.Scripts.DiveLogs.Utils.Gases;
 using Assets.Scripts.Utility;
@@ -69,6 +71,28 @@ namespace Shearwater
                         }
                     }
                 }
+            }
+
+            return null;
+        }
+
+        public static TimeZoneInfo GetTimezoneFromLocation(string location)
+        {
+            if (string.IsNullOrWhiteSpace(location))
+            {
+                return null;
+            }
+
+            // See more details in https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/default-time-zones?view=windows-11
+            var cityTimezoneMap = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            {
+                { "Beijing", "China Standard Time" },
+                { "Semporna", "Singapore Standard Time" }
+            };
+
+            if (cityTimezoneMap.TryGetValue(location.Trim(), out string timezoneId))
+            {
+                return TimeZoneInfo.FindSystemTimeZoneById(timezoneId);
             }
 
             return null;
@@ -285,6 +309,5 @@ namespace Shearwater
                     return true;
             }
         }
-
     }
 }

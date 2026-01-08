@@ -56,13 +56,16 @@ namespace DiveLogExporter.Parser
             var details = shearwaterDiveLog.DiveLogDetails;
             var interpretedLog = shearwaterDiveLog.InterpretedLogData;
 
+            var timezoneInfo = Shearwater.ShearwaterUtils.GetTimezoneFromLocation(details.Location.Value);
+            var startDate = TimeZoneInfo.ConvertTimeToUtc(DateTime.SpecifyKind(details.DiveDate, DateTimeKind.Unspecified), timezoneInfo);
+
             var res = new GeneralDiveLogSummary
             {
                 // Summary Info
                 Number = Shearwater.ShearwaterUtils.GetDiveNumber(shearwaterDiveLog),
                 Mode = Shearwater.ShearwaterUtils.GetDiveMode(shearwaterDiveLog),
-                StartDate = details.DiveDate.ToString(),
-                EndDate = details.DiveDate.AddSeconds(footer.DiveTimeInSeconds).ToString(),
+                StartDate = startDate,
+                EndDate = startDate.AddSeconds(footer.DiveTimeInSeconds),
                 DurationInSeconds = footer.DiveTimeInSeconds,
                 Diver = Shearwater.ShearwaterUtils.GetDiver(shearwaterDiveLog) ?? "Jovery",
                 Buddy = details.Buddy.Value,

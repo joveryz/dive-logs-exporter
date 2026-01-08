@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using DiveLogExporter.Parser;
 using DiveLogExporter.Model;
+using DiveLogExporter.Parser;
 
 namespace DiveLogExporter
 {
@@ -50,7 +50,7 @@ namespace DiveLogExporter
 
         private static void AdjustDiveLogNumbers(ref List<GeneralDiveLog> diveLogs)
         {
-            diveLogs = diveLogs.OrderBy(diveLog => DateTime.Parse(diveLog.Summary.StartDate)).ToList();
+            diveLogs = diveLogs.OrderBy(diveLog => diveLog.Summary.StartDate).ToList();
 
             int currentNumber = 1;
             foreach (var diveLog in diveLogs)

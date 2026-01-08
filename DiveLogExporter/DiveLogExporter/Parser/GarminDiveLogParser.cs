@@ -55,8 +55,8 @@ namespace DiveLogExporter.Parser
                     // Summary Info
                     Number = (int)garminDiveSummary.GetReferenceIndex(),
                     Mode = GarminUtils.GetDiveMode(garminLap),
-                    StartDate = new Dynastream.Fit.DateTime(garminLap.GetStartTime().GetTimeStamp(), i == 0 ? 0 : -3).ToString(),
-                    EndDate = new Dynastream.Fit.DateTime(garminLap.GetStartTime().GetTimeStamp(), garminDiveSummary.GetBottomTime().Value + 2).ToString(),
+                    StartDate = new Dynastream.Fit.DateTime(garminLap.GetStartTime().GetTimeStamp(), i == 0 ? 0 : -3).GetDateTime(), // Garmin use UTC time by default
+                    EndDate = new Dynastream.Fit.DateTime(garminLap.GetStartTime().GetTimeStamp(), garminDiveSummary.GetBottomTime().Value + 2).GetDateTime(), // Garmin use UTC time by default
                     DurationInSeconds = (int)Math.Floor(garminDiveSummary.GetBottomTime().Value) + (i == 0 ? 2 : 5),
                     Diver = diver,
                     Buddy = buddy,
@@ -102,8 +102,8 @@ namespace DiveLogExporter.Parser
 
                 foreach (var diveLog in res)
                 {
-                    var diveStartTime = System.DateTime.Parse(diveLog.Summary.StartDate);
-                    var diveEndTime = System.DateTime.Parse(diveLog.Summary.EndDate);
+                    var diveStartTime = diveLog.Summary.StartDate.Value;
+                    var diveEndTime = diveLog.Summary.EndDate.Value;
 
                     if (currentTime >= diveStartTime && currentTime <= diveEndTime)
                     {

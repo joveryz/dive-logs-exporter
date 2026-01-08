@@ -27,7 +27,9 @@ namespace DiveLogExporter.Model
                 var value = property.GetValue(obj);
                 if (value != null)
                 {
-                    var stringValue = value.ToString();
+                    var stringValue = value is DateTime dateTime
+                        ? dateTime.ToUniversalTime().ToString("yyyy-MM-dd HH:mm")
+                        : value.ToString();
                     if (stringValue.Contains(",") || stringValue.Contains("\"") || stringValue.Contains("\n"))
                     {
                         stringValue = "\"" + stringValue.Replace("\"", "\"\"") + "\"";

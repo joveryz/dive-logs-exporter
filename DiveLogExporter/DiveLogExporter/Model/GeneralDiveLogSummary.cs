@@ -1,4 +1,6 @@
-﻿namespace DiveLogExporter.Model
+﻿using System;
+
+namespace DiveLogExporter.Model
 {
     public class GeneralDiveLogSummary
     {
@@ -8,9 +10,9 @@
 
         public string? Mode { get; set; }
 
-        public string? StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
 
-        public string? EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
         public int? DurationInSeconds { get; set; }
 
