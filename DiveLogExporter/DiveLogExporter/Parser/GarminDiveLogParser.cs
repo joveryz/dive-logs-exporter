@@ -24,10 +24,10 @@ namespace DiveLogExporter.Parser
             var decodeDemo = new Decode();
             var fitListener = new FitListener();
             var splits = Path.GetFileNameWithoutExtension(inputPath).Split('_');
-            var buddy = splits.Length >= 2 ? splits[1] : "Solo";
-            var location = splits.Length >= 3 ? splits[2] : "Unknown";
-            var site = splits.Length >= 4 ? splits[3] : "Unknown";
-            var diver = splits.Length >= 5 ? splits[4] : "Unknown";
+            var diver = splits.Length >= 2 ? splits[1] : "Unknown";
+            var buddy = splits.Length >= 3 ? splits[2] : "Unknown";
+            var location = splits.Length >= 4 ? splits[3] : "Unknown";
+            var site = splits.Length >= 5 ? splits[4] : "Unknown";
             var note = splits.Length >= 6 ? splits[5] : null;
 
             decodeDemo.MesgEvent += fitListener.OnMesg;
