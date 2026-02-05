@@ -1,4 +1,4 @@
-# dive-logs-exporter
+# Dive Logs Exporter
 
 Export dive logs from dive computers' data files to CSV.
 
