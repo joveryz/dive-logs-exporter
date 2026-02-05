@@ -40,16 +40,16 @@ jobs:
         uses: NuGet/setup-nuget@v2
 
       - name: Restore NuGet packages
-        run: nuget restore DiveLogExporter.sln
+        run: nuget restore DiveLogsExporter.sln
 
       - name: Build solution
-        run: msbuild DiveLogExporter.sln /p:Configuration=Release /p:Platform="Any CPU"
+        run: msbuild DiveLogsExporter.sln /p:Configuration=Release /p:Platform="Any CPU"
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: DiveLogExporter
-          path: DiveLogExporter/DiveLogExporter/bin/Release/
+          name: DiveLogsExporter
+          path: DiveLogsExporter/DiveLogsExporter/bin/Release/
   
   trigger:
     runs-on: ubuntu-latest

@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("DiveLogExporter")]
+[assembly: AssemblyTitle("DiveLogsExporter")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("REDEBUG")]
-[assembly: AssemblyProduct("DiveLogExporter")]
+[assembly: AssemblyProduct("DiveLogsExporter")]
 [assembly: AssemblyCopyright("Copyright © REDEBUG 2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

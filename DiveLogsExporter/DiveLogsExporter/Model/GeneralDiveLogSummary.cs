@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DiveLogExporter.Model
+namespace DiveLogsExporter.Model
 {
     public class GeneralDiveLogSummary
     {

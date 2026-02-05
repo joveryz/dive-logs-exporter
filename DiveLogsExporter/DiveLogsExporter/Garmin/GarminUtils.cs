@@ -2,7 +2,7 @@
 using System.Reflection;
 using Dynastream.Fit;
 
-namespace DiveLogExporter.Garmin
+namespace DiveLogsExporter.Garmin
 {
     public static class GarminUtils
     {

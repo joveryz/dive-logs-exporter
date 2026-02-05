@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DiveLogExporter.Model
+namespace DiveLogsExporter.Model
 {
     public class GeneralDiveLog
     {

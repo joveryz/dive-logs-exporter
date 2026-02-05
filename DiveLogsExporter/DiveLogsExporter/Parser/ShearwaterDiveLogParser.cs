@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Assets.Scripts.Persistence.LocalCache;
-using DiveLogExporter.Model;
+using DiveLogsExporter.Model;
 using DiveLogModels;
 
-namespace DiveLogExporter.Parser
+namespace DiveLogsExporter.Parser
 {
     public class ShearwaterDiveLogParser : IDiveLogParser
     {

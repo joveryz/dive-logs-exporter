@@ -6,7 +6,7 @@ using Assets.Scripts.DiveLogs.Utils.Gases;
 using Assets.Scripts.Utility;
 using Assets.ShearwaterCloud.Modules.Graphs.DiveGraph.GraphAssembly.GraphDataAssembly.SeriesSampleAssemblers;
 using CoreParserUtilities;
-using DiveLogExporter.Model;
+using DiveLogsExporter.Model;
 using DiveLogModels;
 using ExtendedCoreParserUtilities;
 using ShearwaterUtils;

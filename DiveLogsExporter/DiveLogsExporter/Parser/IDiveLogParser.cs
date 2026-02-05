@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using DiveLogExporter.Model;
+using DiveLogsExporter.Model;
 
-namespace DiveLogExporter.Parser
+namespace DiveLogsExporter.Parser
 {
     public interface IDiveLogParser
     {

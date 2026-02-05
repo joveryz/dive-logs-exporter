@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace DiveLogExporter.Parser
+namespace DiveLogsExporter.Parser
 {
     public class ParserFactory
     {

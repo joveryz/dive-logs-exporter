@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using DiveLogExporter.Garmin;
-using DiveLogExporter.Model;
+using DiveLogsExporter.Garmin;
+using DiveLogsExporter.Model;
 using Dynastream.Fit;
 
-namespace DiveLogExporter.Parser
+namespace DiveLogsExporter.Parser
 {
     public class GarminDiveLogParser : IDiveLogParser
     {

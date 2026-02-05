@@ -1,4 +1,4 @@
-﻿namespace DiveLogExporter.Model
+﻿namespace DiveLogsExporter.Model
 {
     public class GeneralDiveLogSample
     {
